@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    Random: {{ rand(0,100) }}
+                    
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    {{ $user->name }}
+                    {{ $tipo->name }}
                 </div>
             </div>
         </div>

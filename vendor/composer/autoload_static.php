@@ -224,6 +224,7 @@ class ComposerStaticInitcc0b3d6bd95ae3688b14a9a6b47fc29c
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'InputsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/InputsTableSeeder.php',
+        'OutputsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/OutputsTableSeeder.php',
         'TiposTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TiposTableSeeder.php',
         'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UsersTableSeeder.php',
     );

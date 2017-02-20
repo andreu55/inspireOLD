@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Auth;
 use App\Input;
+use App\Output;
 use App\Tipo;
 
 class HomeController extends Controller
@@ -29,41 +30,47 @@ class HomeController extends Controller
     {
       $user = Auth::user();
 
-      $personaje = Input::deTipo(1);
-      $escenarios = Input::deTipo(2);
-      $objetos = Input::deTipo(3);
-      $situaciones = Input::deTipo(4);
-      $temas = Input::deTipo(5);
+      $random = rand(0,100);
 
-      $output = $this->traduce("Cómo le gustaría a #1 que fuera #5");
+      $selected_tipo = rand(1, 5);
 
-      return view('home')->with('output', $output)
+      $tipo = Tipo::find($selected_tipo);
+
+      $frase = Output::deTipo($selected_tipo);
+
+      $output = $this->traduce($frase);
+
+      return view('home')->with('tipo', $tipo)
+                         ->with('output', $output)
                          ->with('user', $user);
     }
 
-    public function traduce($output) {
+    public function traduce($frase) {
 
-      $result = '';
+      $output = '';
 
-      $palabras = explode(' ', $output);
-
-      // dd($palabras);
+      $palabras = explode(' ', $frase);
 
       foreach ($palabras as $palabra) {
 
         // Si el campo empieza por # tenemos que cargar el correspondiente tipo (si es #1 habrá que cargar Input::deTipo(1))
         if (substr($palabra, 0, 1) == '#') {
-          $tipo = substr($palabra, 1);
-          $palabra = Input::deTipo($tipo)->name; // Faltará traducir
-          $palabra = strtolower($palabra);
+
+          // Puede que algunas frases vayan seguidas de un cierre ?
+          if (!is_numeric(substr($palabra, -1))) { $cierre = substr($palabra, -1); }
+          else { $cierre = ""; }
+
+          $tipo = substr($palabra, 1, 1);
+          $palabra = Input::deTipo($tipo); // TODO: Traducir
+          $palabra = mb_strtolower($palabra, 'UTF-8') . $cierre;
         }
-        $result .= $palabra . " "; // Volvemos a generar la url
+        $output .= $palabra . " "; // Volvemos a generar la url
       }
 
       // Quitamos el ultimo espacio
-      $result = substr($result, 0, -1);
+      $output = substr($output, 0, -1);
 
-      return $result;
+      return $output;
     }
 
 }

@@ -11,6 +11,7 @@ return array(
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'InputsTableSeeder' => $baseDir . '/database/seeds/InputsTableSeeder.php',
+    'OutputsTableSeeder' => $baseDir . '/database/seeds/OutputsTableSeeder.php',
     'TiposTableSeeder' => $baseDir . '/database/seeds/TiposTableSeeder.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
 );

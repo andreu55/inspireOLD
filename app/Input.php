@@ -10,5 +10,7 @@ class Input extends Model
     public function user() { return $this->belongsTo('App\User'); }
 
     // 1 => Personajes // 2 => Escenarios // 3 => Objetos // 4 => Situaciones // 5 => Temas
-    public static function deTipo($tipo_id) { return \DB::table('inputs')->where('tipo_id', $tipo_id)->where('generico', 1)->inRandomOrder()->first(); }
+    public static function deTipo($tipo_id) { return \DB::table('inputs')->where('tipo_id', $tipo_id)->where('generico', 1)->inRandomOrder()->value('name'); }
+
+    public static function allGeneric($tipo_id) { return \DB::table('inputs')->where('tipo_id', $tipo_id)->where('generico', 1)->get(); }
 }
