@@ -1,34 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    {{ $tipo->name }}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Personaje</div>
-                <div class="panel-body">
-                  {{ $output }}
-                </div>
-            </div>
-        </div>
+<header>
+  <div class="header-content">
+    <div class="inner">
+        <h1>{{ $output }}</h1>
+        <h5 class="wow fadeIn text-normal wow fadeIn">{{ $tipo->name }}</h5>
+        <a href="#one" class="btn btn-primary-outline btn-xl page-scroll wow fadeInUp m-t-3">Otra frase</a>
     </div>
-</div>
+  </div>
+</header>
 @endsection
