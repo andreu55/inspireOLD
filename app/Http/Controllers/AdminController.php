@@ -27,37 +27,56 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id = 0)
     {
       $user = Auth::user();
-
-      $personajes = Input::allGeneric(1);
-      $escenarios = Input::allGeneric(2);
-      $objetos = Input::allGeneric(3);
-      $situaciones = Input::allGeneric(4);
-      $temas = Input::allGeneric(5);
-
       $tipos = Tipo::all();
 
-      return view('admin/admin')->with('user', $user)
-                                ->with('tipos', $tipos)
-                                ->with('personajes', $personajes)
-                                ->with('escenarios', $escenarios)
-                                ->with('objetos', $objetos)
-                                ->with('situaciones', $situaciones)
-                                ->with('temas', $temas);
+      if ($id) {
+        if ($tipo = Tipo::find($id)) {
+
+          $inputs = Input::allGeneric($id);
+
+          return view('admin/input')->with('user', $user)
+                                    ->with('tipo', $tipo)
+                                    ->with('tipos', $tipos)
+                                    ->with('inputs', $inputs);
+        }
+      } else {
+
+        $outputs = Output::get();
+
+        return view('admin/outputs')->with('user', $user)
+                                  ->with('tipos', $tipos)
+                                  ->with('outputs', $outputs);
+      }
     }
 
     public function tipoNew(Request $request) {
-      $input = new Input;
+
+      if ($request->name && $request->tipo_id) {
+
+        $input = new Input;
         $input->name = $request->name;
         $input->name_trans = "";
         $input->tipo_id = $request->tipo_id;
         $input->user_id = $request->user_id;
         $input->generico = $request->generico;
-      $input->save();
+        $input->save();
+      }
+
 
       return back();
+    }
+
+    public function borraInput(Request $request) {
+
+      if ($input_id = $request->input_id) {
+
+        if ($input = Input::find($input_id)) { $input->delete(); }
+
+        return redirect('admin/' . $request->tipo_id);
+      }
     }
 
 }

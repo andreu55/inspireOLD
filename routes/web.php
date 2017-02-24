@@ -12,12 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('landing');
+
+    $frases = App\Output::cuantasDeTipo(1, 3);
+    return view('landing')->with('frases', $frases);
 });
 
 Auth::routes();
 
 Route::get('home', 'HomeController@index');
-Route::get('admin', 'AdminController@index');
+
+Route::get('admin/{id?}', 'AdminController@index');
 
 Route::post('tipo/new', 'AdminController@tipoNew');
+Route::post('input/delete', 'AdminController@borraInput');

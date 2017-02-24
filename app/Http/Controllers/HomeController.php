@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
       $user = Auth::user();
 
-      $selected_tipo = rand(1, 5);
+      $selected_tipo = 3; // rand(1, 5)
 
       $tipo = Tipo::find($selected_tipo);
 
