@@ -50,6 +50,7 @@ class OutputsTableSeeder extends Seeder
         ['frase' => 'Una contradicción de #1'],
         ['frase' => '¿Ha estado #1 en #2?'],
         ['frase' => '¿Tiene #1 un/a #3?'],
+        ['frase' => '¿Es #3 el objeto preferido de #1?'],
       ]);
     }
 }
