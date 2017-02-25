@@ -1,23 +1,24 @@
 @extends('admin.admin')
 
 @section('inputs')
-  <h5>Outputs</h5>
-  @foreach ($outputs as $output)
-    - {{ $output->frase }} <br>
-  @endforeach
-@endsection
-
-@section('nuevo')
-  {{-- <h5>Nuevo {{ strtolower($tipo->name) }} genérico</h5>
-  <form class="" action="{{ url('tipo/new') }}" method="post">
-    {{ csrf_field() }}
-    <input type="hidden" name="user_id" value="{{ $user->id }}">
-    <input type="hidden" name="tipo_id" value="{{ $tipo->id }}">
-    <input type="hidden" name="generico" value="1">
-
-    <div class="form-group">
-      <input type="text" class="form-control" id="name" name="name">
+  <div class="row">
+    <div class="col-sm-8">
+      <h5>Outputs</h5>
+      <ul>
+        @foreach ($outputs as $output)
+          <li>{{ $output->frase }}</li>
+        @endforeach
+      </ul>
     </div>
-    <button type="submit" class="btn btn-default">Padentro</button>
-  </form> --}}
+    <div class="col-sm-4">
+      <h5>Nuevo output</h5>
+        <form class="" action="{{ url('output/new') }}" method="post">
+          {{ csrf_field() }}
+          <div class="form-group">
+          <textarea name="frase" class="form-control" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Padentro</button>
+      </form>
+    </div>
+  </div>
 @endsection

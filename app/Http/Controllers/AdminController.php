@@ -52,10 +52,9 @@ class AdminController extends Controller
       }
     }
 
-    public function tipoNew(Request $request) {
+    public function newInput(Request $request) {
 
       if ($request->name && $request->tipo_id) {
-
         $input = new Input;
         $input->name = $request->name;
         $input->name_trans = "";
@@ -64,8 +63,17 @@ class AdminController extends Controller
         $input->generico = $request->generico;
         $input->save();
       }
+      return back();
+    }
 
+    public function newOutput(Request $request) {
 
+      if ($request->frase) {
+
+        $output = new Output;
+        $output->frase = $request->frase;
+        $output->save();
+      }
       return back();
     }
 

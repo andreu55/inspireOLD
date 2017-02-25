@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container" style="margin:80px">
-    <div class="inner">
+    <div class="inner" style="margin:80px">
       <div class="row">
-        <div class="col-3">
+        <div class="col-sm-3">
           <h5>Outputs</h5>
           <div class="list-group">
             <a href="{{ url('admin') }}" class="list-group-item list-group-item-action{{ Request::is('admin') ? ' active' : '' }}">Outputs</a>
@@ -17,7 +16,7 @@
             @endforeach
           </div>
         </div>
-        <div class="col-9">
+        <div class="col-sm-9">
           @yield('inputs')
           {{-- <h3>Nuevo input genérico</h3>
           <form class="" action="{{ url('tipo/new') }}" method="post">
@@ -42,6 +41,5 @@
         </div>
       </div>
     </div>
-  </div>
 
 @endsection
