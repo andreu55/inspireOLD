@@ -22,7 +22,7 @@ class CreatePrincipalTables extends Migration
         Schema::create('inputs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('name_trans');
+            $table->string('name_trans')->nullable();
             $table->integer('tipo_id')->unsigned()->nullable();
             $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->integer('user_id')->unsigned()->nullable();

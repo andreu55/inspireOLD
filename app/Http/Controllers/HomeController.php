@@ -30,16 +30,22 @@ class HomeController extends Controller
     {
       $user = Auth::user();
 
-      $selected_tipo = 3; // rand(1, 5)
+      $selected_tipo = rand(1, 5);
+      $cuantas = 3;
 
       $tipo = Tipo::find($selected_tipo);
 
-      $frase = Output::deTipo($selected_tipo);
+      // $frases = Output::deTipo($selected_tipo);
+      // $output = $this->traduce($frase);
 
-      $output = $this->traduce($frase);
+      $outputs = Output::cuantasDeTipo($selected_tipo, $cuantas);
+
+      $inputs = Input::carga(['1', '2', '3', '4', '5']);
 
       return view('home')->with('tipo', $tipo)
-                         ->with('output', $output)
+                         ->with('inputs', $inputs)
+                         ->with('outputs', $outputs)
+                         ->with('cuantas', $cuantas)
                          ->with('user', $user);
     }
 

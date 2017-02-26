@@ -55,13 +55,7 @@ class AdminController extends Controller
     public function newInput(Request $request) {
 
       if ($request->name && $request->tipo_id) {
-        $input = new Input;
-        $input->name = $request->name;
-        $input->name_trans = "";
-        $input->tipo_id = $request->tipo_id;
-        $input->user_id = $request->user_id;
-        $input->generico = $request->generico;
-        $input->save();
+        $input_id = Input::nuevo($request);
       }
       return back();
     }
@@ -84,6 +78,16 @@ class AdminController extends Controller
         if ($input = Input::find($input_id)) { $input->delete(); }
 
         return redirect('admin/' . $request->tipo_id);
+      }
+    }
+
+    public function borraOutput(Request $request) {
+
+      if ($output_id = $request->output_id) {
+
+        if ($output = Output::find($output_id)) { $output->delete(); }
+
+        return redirect('admin');
       }
     }
 

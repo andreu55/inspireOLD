@@ -11,7 +11,13 @@ class Output extends Model
       return \DB::table('outputs')->where('frase', 'like', "%#".$tipo."%")->inRandomOrder()->value('frase');
     }
 
-    public static function cuantasDeTipo($tipo, $cuantas) {
+    public static function cuantasDeTipo($tipo, $cuantas = 1) {
       return \DB::table('outputs')->select('frase')->where('frase', 'like', "%#".$tipo."%")->inRandomOrder()->take($cuantas)->get();
-    }    
+
+      // $res = [];
+      // foreach ($outputs as $key => $output) {
+      //   $res[$key] = new \stdClass();
+      //   $res[$key]->frase = $output->frase;
+      // }
+    }
 }
