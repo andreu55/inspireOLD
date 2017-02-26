@@ -47,8 +47,9 @@
     }
   }
 
-  function cambiaInput() {
-      iin = iin + 1;
+  function cambiaInput(tipo) {
+      if (iin > {{ $cuantas - 1 }} || inputs[tipo-1][iin] != undefined) { iin = 0; }
+      else { iin = iin + 1; }
   }
 
   function muestraFrase() {
@@ -64,9 +65,9 @@
       tipo = frase.substring(pos+1, pos+2);
 
       // Cargamos el input correspondiente
-      input = "<span id='input_" + tipo + "'>" + inputs[tipo-1][iin] + "</span>";
+      cambiaInput(tipo);
 
-      cambiaInput();
+      input = "<span id='input_" + tipo + "'>" + inputs[tipo-1][iin] + "</span>";
 
       if (pos != 0) { input = input.toLowerCase(); }
 

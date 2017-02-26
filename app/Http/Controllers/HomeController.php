@@ -31,7 +31,7 @@ class HomeController extends Controller
       $user = Auth::user();
 
       $selected_tipo = rand(1, 5);
-      $cuantas = 3;
+      $cuantas = 10;
 
       $tipo = Tipo::find($selected_tipo);
 
@@ -40,7 +40,7 @@ class HomeController extends Controller
 
       $outputs = Output::cuantasDeTipo($selected_tipo, $cuantas);
 
-      $inputs = Input::carga(['1', '2', '3', '4', '5']);
+      $inputs = Input::carga(['1', '2', '3', '4', '5'], $cuantas);
 
       return view('home')->with('tipo', $tipo)
                          ->with('inputs', $inputs)
