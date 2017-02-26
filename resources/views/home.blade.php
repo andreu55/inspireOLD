@@ -53,15 +53,29 @@
 
   function muestraFrase() {
 
+    // Cogemos la siguiente frase disponible
     var frase = outputs[iout];
     var pos = frase.search("#");
-    var tipo = frase.substring(pos+1, pos+2);
+    var tipo;
+    var input;
 
-    var rand = Math.floor(Math.random() * 6);
+    while(pos != -1) {
+      // Sacamos el tipo
+      tipo = frase.substring(pos+1, pos+2);
 
-    var antonio = inputs[tipo][iin];
+      // Cargamos el input correspondiente
+      input = "<span id='input_" + tipo + "'>" + inputs[tipo-1][iin] + "</span>";
 
-    $('#frase').text(frase);
+      cambiaInput();
+
+      if (pos != 0) { input = input.toLowerCase(); }
+
+      // Generamos la frase de nuevo con el campo sustituido
+      frase = frase.substring(0, pos) + input + frase.substring(pos+2);
+      pos = frase.search("#");
+    }
+
+    $('#frase').html(frase);
   }
 
 </script>
