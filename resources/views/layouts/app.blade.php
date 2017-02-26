@@ -2,16 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <meta name="description" content="One page Bootstrap 4 theme to show What&#39;s new in Bootstrap 4. Discover new features like cards, the xl grid tier, em sizing and how to convert from Bootstrap 3." />
+    <title>Inspire{{ Request::segment(1) ? ' | ' . ucfirst(Request::segment(1)) : '' }}</title>
+    <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Codeply">
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    {{-- <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" rel="stylesheet" /> --}}
 
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" /> --}}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
     @yield('css')
 
@@ -37,9 +36,9 @@
                   <div class="dropdown-menu" style="margin-left:-40px;">
                     @if (Auth::user()->id == "1" || Auth::user()->id == "2")
                       <a class="dropdown-item" href="{{ url('admin') }}">Admin</a>
-                      <div class="dropdown-divider"></div>
                     @endif
-
+                    <a class="dropdown-item" href="{{ url('home') }}">Home</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                   </div>
 

@@ -6,7 +6,6 @@
       <div class="inner">
           <h2>
             <span id="titulaco"></span>
-            <span class="typed-cursor"></span>
           </h2>
           <h5 class="wow fadeIn text-normal wow fadeIn">Encuentra la inspiración que buscas</h5>
           <a href="{{ url('register') }}" class="btn btn-primary-outline page-scroll wow fadeInUp m-t-3">Regístrate</a>
@@ -54,7 +53,7 @@
           ],
           typeSpeed: 29,
           callback: function() {
-            $('.typed-cursor').slideUp();
+            $('.typed-cursor').slideUp().fadeOut();
           }
         });
     });
