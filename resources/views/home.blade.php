@@ -5,10 +5,26 @@
   <div class="header-content">
     <div class="inner">
       <h1 id="frase"></h1>
-      <h5 class="wow fadeIn text-normal wow fadeIn">{{ $tipo->name }}</h5>
+      <h5 class="wow fadeIn text-normal wow fadeIn">
+        {{ $tipo->name }}
+        <span id="iin"></span>
+      </h5>
       <button class="btn btn-primary-outline btn-md page-scroll wow fadeInUp m-t-3" onclick="cambiaFrase()">Otra frase</button>
     </div>
   </div>
+
+  <div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+    </ul>
+  </div>
+
 </header>
 @endsection
 
@@ -47,10 +63,30 @@
     }
   }
 
-  function cambiaInput(tipo) {
-      if (iin > {{ $cuantas - 1 }} || inputs[tipo-1][iin] != undefined) { iin = 0; }
-      else { iin = iin + 1; }
+  function getInput(tipo) {
+
+    iin = iin + 1;
+    var input = inputs[tipo-1][iin];
+
+    while (input == undefined) {
+      iin = 0;
+      input = inputs[tipo-1][iin];
+    }
+
+    // Para testing
+    $("#iin").html(iin);
+
+    return input.toLowerCase();
   }
+
+  $("#frase").on("click", "span[class^='input_']", function(e) {
+    tipo = parseInt(this.attributes["data-tipo"].value);
+    $(this).text(getInput(tipo));
+  });
+
+  // on('click', function(){
+  //   this.html(getInput());
+  // });
 
   function muestraFrase() {
 
@@ -64,10 +100,7 @@
       // Sacamos el tipo
       tipo = frase.substring(pos+1, pos+2);
 
-      // Cargamos el input correspondiente
-      cambiaInput(tipo);
-
-      input = "<span id='input_" + tipo + "'>" + inputs[tipo-1][iin] + "</span>";
+      input = "<span class='input_" + tipo + "' data-tipo=" + tipo + ">" + getInput(tipo) + "</span>";
 
       if (pos != 0) { input = input.toLowerCase(); }
 

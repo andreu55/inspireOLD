@@ -348,3 +348,27 @@ img::-moz-selection {
     color: #fff;
     background: 0 0;
 }
+
+[class^='input_'] { cursor: pointer; }
+
+.input_1 { color: #39CCCC; }
+.input_2 { color: #3D9970; }
+.input_3 { color: #FF851B; }
+.input_4 { color: #85144b; }
+.input_5 { color: #0074D9; }
+
+.input_1:hover { color: #49DCDC; }
+.input_2:hover { color: #4DA980; }
+.input_3:hover { color: #FF952B; }
+.input_4:hover { color: #95245b; }
+.input_5:hover { color: #1084E9; }
+
+#frase {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}
