@@ -13,7 +13,16 @@
 
 Route::get('/', function () {
 
-    $frases = App\Output::cuantasDeTipo(1, 3);
+    // $frases = App\Output::cuantasDeTipo(1, 3);
+
+    $aux = ["Patrick actúa de forma ilegal a causa de un adulterio.",
+            "Sucede algo mágico en el patio de una casa.",
+            "brown"
+          ];
+    $rand = array_rand($aux, 3);
+
+    $frases = [$aux[$rand[0]], $aux[$rand[1]], $aux[$rand[2]]];
+
     return view('landing')->with('frases', $frases);
 });
 

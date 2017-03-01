@@ -7,8 +7,8 @@
           <h2>
             <span id="titulaco"></span>
           </h2>
-          <h5 class="wow fadeIn text-normal wow fadeIn">Encuentra la inspiración que buscas</h5>
-          <a href="{{ url('register') }}" class="btn btn-primary-outline page-scroll wow fadeInUp m-t-3">Regístrate</a>
+          <h5 class="wow fadeIn text-normal wow fadeIn" data-wow-duration="2s">Encuentra la inspiración que buscas</h5>
+          <a href="{{ url('register') }}" class="btn btn-default-outline wow fadeInUp" data-wow-duration="2s" data-wow-delay="2s">Regístrate</a>
       </div>
     </div>
   </header>
@@ -47,7 +47,7 @@
         $("#titulaco").typed({
           strings: [
             @foreach ($frases as $frase)
-              "{{ $frase->frase }} ^2000",
+              "{{ $frase }} ^2000",
             @endforeach
             "^1000"
           ],
