@@ -4,6 +4,7 @@
 <header>
   <div class="header-content">
     <div class="inner">
+      <h5 id="test"></h5>
       <h1 id="frase"></h1>
       <h5 class="wow fadeIn text-normal wow fadeIn">
         {{ $tipo->name }}
@@ -15,13 +16,14 @@
 
   <div class="fixed-action-btn horizontal">
     <a class="btn-floating btn-large red">
-      <i class="large material-icons">mode_edit</i>
+      <i class="el el-user"></i>
     </a>
     <ul>
-      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+      <li><a class="btn-floating red"><i class="el el-user"></i></a></li>
+      <li><a class="btn-floating btn-primary"><i class="el el-puzzle"></i></a></li>
+      <li><a class="btn-floating btn-success"><i class="el el-resize-horizontal"></i></a></li>
+      <li><a class="btn-floating btn-info"><i class="el el-comment"></i></a></li>
+      <li><a class="btn-floating btn-warning"><i class="el el-comment"></i></a></li>
     </ul>
   </div>
 
@@ -109,6 +111,7 @@
       pos = frase.search("#");
     }
 
+    $('#test').text(frase);
     $('#frase').html(frase);
   }
 

@@ -43,19 +43,80 @@
 @section('scripts')
   <script src="{{ asset('js/typed.min.js') }}"></script>
   <script>
+
+    var a = b = c = d = e = 0;
+    var personajes = ["Tom", "Jerry", "Mafalda"];
+    var lugares = ["una taberna", "una montaña", "unas ruinas"];
+    var situaciones = ["kjgaf", "<dkjgfakdf", "dkjgsdkjfhd"];
+
     $(function(){
         $("#titulaco").typed({
           strings: [
             @foreach ($frases as $frase)
-              "{{ $frase }} ^2000",
+              "{!! $frase !!}",
             @endforeach
             "^1000"
           ],
-          typeSpeed: 29,
+          contentType: 'html',
+          backDelay: 5000,
+          typeSpeed: 1, // 29
           callback: function() {
-            $('.typed-cursor').slideUp().fadeOut();
+            $('.typed-cursor').slideUp(); // .fadeOut()
+          },
+          onStringTyped: function() {
+
+            animaInput(1, personajes, "[Personaje]");
+            animaInput(2, situaciones, "[situación]");
+            animaInput(4, lugares, "[lugar]");
+
           }
         });
     });
+
+    function animaInput(tipo, arr, original) {
+
+      switch (tipo) {
+        case 1: var i = window.a; break;
+        case 2: var i = window.b; break;
+        case 3: var i = window.c; break;
+        case 4: var i = window.d; break;
+        case 5: var i = window.e; break;
+      }
+
+      setTimeout(function() {
+        $('.input_' + tipo).hide().text(arr[i]).fadeIn();
+        i = i + 1;
+        setTimeout(function() {
+          $('.input_' + tipo).hide().text(arr[i]).fadeIn();
+          i = i + 1;
+          setTimeout(function() {
+            $('.input_' + tipo).hide().text(arr[i]).fadeIn();
+            i = i + 1;
+            setTimeout(function() {
+              $('.input_' + tipo).hide().text(original).fadeIn();
+              i = i + 1;
+            }, 1100);
+          }, 1100);
+        }, 1100);
+      }, 600);
+
+
+      switch (tipo) {
+        case 1: window.a = 0; break;
+        case 2: window.b = 0; break;
+        case 3: window.c = 0; break;
+        case 4: window.d = 0; break;
+        case 5: window.e = 0; break;
+      }
+
+
+    }
+
+    function cambiaInput(tipo, valor) {
+
+    }
+
+    function randBet(min, max) { return Math.floor(Math.random()*(max-min+1)+min); }
+
   </script>
 @endsection

@@ -15,9 +15,9 @@ Route::get('/', function () {
 
     // $frases = App\Output::cuantasDeTipo(1, 3);
 
-    $aux = ["Patrick actúa de forma ilegal a causa de un adulterio.",
-            "Sucede algo mágico en el patio de una casa.",
-            "brown"
+    $aux = ["<span class='input_1'>[Personaje]</span> actúa de forma ilegal a causa de <span class='input_2'>[situación]</span>.",
+            "Sucede algo mágico en <span class='input_4'>[lugar]</span>.",
+            "¿Tiene <span class='input_1'>[personaje]</span> un <span class='input_3'>[objeto]</span>?"
           ];
     $rand = array_rand($aux, 3);
 
