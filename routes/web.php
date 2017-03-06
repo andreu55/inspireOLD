@@ -32,6 +32,8 @@ Route::get('home', 'HomeController@index');
 
 Route::get('admin/{id?}', 'AdminController@index');
 
+Route::get('tipo/{id?}', 'UserController@cambiaTipo');
+
 Route::post('tipo/new', 'AdminController@newInput');
 Route::post('output/new', 'AdminController@newOutput');
 Route::post('input/delete', 'AdminController@borraInput');

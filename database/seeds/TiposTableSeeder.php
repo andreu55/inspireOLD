@@ -12,11 +12,11 @@ class TiposTableSeeder extends Seeder
     public function run()
     {
       DB::table('tipos')->insert([
-        ['id' => 1, 'name' => 'Personajes', 'name_trans' => 'personajes'],
-        ['id' => 2, 'name' => 'Escenarios', 'name_trans' => 'escenarios'],
-        ['id' => 3, 'name' => 'Objetos', 'name_trans' => 'objetos'],
-        ['id' => 4, 'name' => 'Situaciones', 'name_trans' => 'situaciones'],
-        ['id' => 5, 'name' => 'Temas', 'name_trans' => 'temas']
+        ['id' => 1, 'name' => 'Personajes', 'name_trans' => 'personajes', 'icon' => 'user'],
+        ['id' => 2, 'name' => 'Escenarios', 'name_trans' => 'escenarios', 'icon' => 'globe'],
+        ['id' => 3, 'name' => 'Objetos', 'name_trans' => 'objetos', 'icon' => 'key'],
+        ['id' => 4, 'name' => 'Situaciones', 'name_trans' => 'situaciones', 'icon' => 'puzzle-piece'],
+        ['id' => 5, 'name' => 'Temas', 'name_trans' => 'temas', 'icon' => 'comments-o']
       ]);
     }
 }

@@ -17,6 +17,7 @@ class CreatePrincipalTables extends Migration
           $table->increments('id');
           $table->string('name');
           $table->string('name_trans');
+          $table->string('icon');
         });
 
         Schema::create('inputs', function (Blueprint $table) {

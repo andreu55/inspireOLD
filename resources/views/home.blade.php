@@ -4,26 +4,25 @@
 <header>
   <div class="header-content">
     <div class="inner">
-      <h5 id="test"></h5>
+      {{-- <h5 id="test"></h5> --}}
       <h1 id="frase"></h1>
       <h5 class="wow fadeIn text-normal wow fadeIn">
-        {{ $tipo->name }}
-        <span id="iin"></span>
+        {{-- {{ $tipo->name }} <span id="iin"></span> --}}
       </h5>
-      <button class="btn btn-primary-outline btn-md page-scroll wow fadeInUp m-t-3" onclick="cambiaFrase()">Otra frase</button>
+      <button class="btn btn-default-outline wow fadeInUp" onclick="cambiaFrase()">Otra frase</button>
     </div>
   </div>
 
   <div class="fixed-action-btn horizontal">
-    <a class="btn-floating btn-large red">
-      <i class="el el-user"></i>
+    <a class="btn-floating btn-large btn-input_{{ $tipo->id }}" data-toggle="tooltip" data-placement="top" title="{{ $tipo->name }}">
+      <i class="fa fa-{{ $tipo->icon }}"></i>
     </a>
     <ul>
-      <li><a class="btn-floating red"><i class="el el-user"></i></a></li>
-      <li><a class="btn-floating btn-primary"><i class="el el-puzzle"></i></a></li>
-      <li><a class="btn-floating btn-success"><i class="el el-resize-horizontal"></i></a></li>
-      <li><a class="btn-floating btn-info"><i class="el el-comment"></i></a></li>
-      <li><a class="btn-floating btn-warning"><i class="el el-comment"></i></a></li>
+      @foreach ($tipos as $t)
+        <li data-toggle="tooltip" data-placement="top" title="{{ $t->name }}">
+          <a href="{{ url('tipo/'.$t->id) }}" class="btn-floating btn-input_{{ $t->id }}"><i class="fa fa-fw fa-{{ $t->icon }}"></i></a>
+        </li>
+      @endforeach
     </ul>
   </div>
 
@@ -32,6 +31,10 @@
 
 @section('scripts')
 <script type="text/javascript">
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
 
   // i de input y de output
   var iin = 0;

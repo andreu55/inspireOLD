@@ -105,6 +105,7 @@
   transition: .3s;
   cursor: pointer;
   vertical-align: middle;
+  margin-top: 2px;
 }
 
 .btn-floating:hover {

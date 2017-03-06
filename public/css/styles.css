@@ -268,7 +268,7 @@ header .header-content .inner p {
     header .header-content .inner {
         margin-right: auto;
         margin-left: auto;
-        max-width: 1000px;
+        /*max-width: 1500px;*/
     }
 
     header .header-content .inner h1 {
@@ -363,7 +363,23 @@ img::-moz-selection {
 .input_4:hover { color: #95245b; }
 .input_5:hover { color: #1084E9; }
 
+.btn-input_1 { background-color: #39CCCC; }
+.btn-input_2 { background-color: #3D9970; }
+.btn-input_3 { background-color: #FF851B; }
+.btn-input_4 { background-color: #85144b; }
+.btn-input_5 { background-color: #0074D9; }
+
+.btn-input_1:hover { background-color: #49DCDC; }
+.btn-input_2:hover { background-color: #4DA980; }
+.btn-input_3:hover { background-color: #FF952B; }
+.btn-input_4:hover { background-color: #95245b; }
+.btn-input_5:hover { background-color: #1084E9; }
+
+
 #frase {
+
+  margin-bottom: 20px;
+
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
