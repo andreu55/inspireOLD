@@ -32,19 +32,28 @@
 @section('scripts')
 <script type="text/javascript">
 
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  });
-
   // i de input y de output
   var iin = 0;
   var iout = 0;
 
+  var u = ["un", "una"];
+  var e = ["el", "la"];
+
   var inputs = [
-    @foreach ($inputs as $key => $tipos_input)
+    @foreach ($inputs as $tipos_input)
       [
         @foreach ($tipos_input as $input)
           "{{ $input->name }}",
+        @endforeach
+      ],
+    @endforeach
+  ];
+
+  var sexos = [
+    @foreach ($inputs as $tipos_input)
+      [
+        @foreach ($tipos_input as $input)
+          "{{ $input->sexo }}",
         @endforeach
       ],
     @endforeach
@@ -56,10 +65,6 @@
     @endforeach
   ];
 
-  $(document).ready(function(){
-    muestraFrase();
-  });
-
   function cambiaFrase() {
     if (iout >= {{ $cuantas - 1 }} || !outputs[iout + 1]) { location.reload(); }
     else {
@@ -68,7 +73,7 @@
     }
   }
 
-  function getInput(tipo) {
+  function getInput(tipo, articulo) {
 
     iin = iin + 1;
     var input = inputs[tipo-1][iin];
@@ -78,20 +83,19 @@
       input = inputs[tipo-1][iin];
     }
 
+    // si encuentra articulo en modo #1u o #1e saltamos una posicion más al construir la frase
+    if (articulo == "u" || articulo == "e") {
+      if (articulo == "u") { articulo = u[sexos[tipo-1][iin]] + " "; }
+      if (articulo == "e") { articulo = e[sexos[tipo-1][iin]] + " "; }
+    } else { articulo = ""; }
+
+    input = articulo + input;
+
     // Para testing
-    $("#iin").html(iin);
+    // $("#iin").html(iin);
 
     return input.toLowerCase();
   }
-
-  $("#frase").on("click", "span[class^='input_']", function(e) {
-    tipo = parseInt(this.attributes["data-tipo"].value);
-    $(this).text(getInput(tipo));
-  });
-
-  // on('click', function(){
-  //   this.html(getInput());
-  // });
 
   function muestraFrase() {
 
@@ -101,22 +105,49 @@
     var tipo;
     var input;
 
+    // Mientras encontremos simbolos # en la frase
     while(pos != -1) {
+
       // Sacamos el tipo
       tipo = frase.substring(pos+1, pos+2);
+      articulo = frase.substring(pos+2, pos+3);
 
-      input = "<span class='input_" + tipo + "' data-tipo=" + tipo + ">" + getInput(tipo) + "</span>";
+      // si encuentra articulo en modo #1u o #1e saltamos una posicion más al construir la frase
+      if (articulo == "u" || articulo == "e") { extra = 1; }
+      else { extra = 0; }
 
-      if (pos != 0) { input = input.toLowerCase(); }
+      input = "<span class='input_" + tipo + "' data-tipo=" + tipo + " data-articulo=" + articulo + ">" + getInput(tipo, articulo) + "</span>";
+
+      // if (pos != 0) { input = input.toLowerCase(); }
 
       // Generamos la frase de nuevo con el campo sustituido
-      frase = frase.substring(0, pos) + input + frase.substring(pos+2);
+      frase = frase.substring(0, pos) + input + frase.substring(pos+2+extra);
       pos = frase.search("#");
     }
 
     $('#test').text(frase);
     $('#frase').html(frase);
   }
+
+  // Para cambiar los inputs al clickar en ellos
+  $("#frase").on("click", "span[class^='input_']", function(e) {
+
+    tipo = parseInt(this.attributes["data-tipo"].value);
+    articulo = this.attributes["data-articulo"].value;
+    
+    $(this).text(getInput(tipo, articulo));
+  });
+
+
+  $(document).ready(function(){
+
+    // Cargamos la primera frase
+    muestraFrase();
+
+    // Activamos los tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
+  });
 
 </script>
 @endsection

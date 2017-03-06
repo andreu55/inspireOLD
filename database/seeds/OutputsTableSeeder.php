@@ -28,7 +28,7 @@ class OutputsTableSeeder extends Seeder
         ['frase' => '¿Cómo le gustaría a la familia de #1 que fuera él/ella?'],
         ['frase' => '¿Qué objetos puedes encontrar en #2?'],
         ['frase' => 'Sucede algo mágico en un/una #2'],
-        ['frase' => '#1 y #2 se encuentran en #2'],
+        ['frase' => '#1 y #1 se encuentran en #2'],
         ['frase' => '#1 tiene una habilidad especial.'],
         ['frase' => '¿Qué hace #1 para divertirse?'],
         ['frase' => '#1 actúa de forma ilegal a causa de un/una #4.'],
@@ -60,8 +60,8 @@ class OutputsTableSeeder extends Seeder
         ['frase' => '¿Qué le ocasiona rechazo a #1?'],
         ['frase' => 'Una contradicción de #1'],
         ['frase' => '¿Ha estado #1 en #2?'],
-        ['frase' => '¿Tiene #1 un/a #3?'],
-        ['frase' => '¿Es #3 el objeto preferido de #1?'],
+        ['frase' => '¿Tiene #1 #3u?'],
+        ['frase' => '¿Es #3u el objeto preferido de #1?'],
       ]);
     }
 }

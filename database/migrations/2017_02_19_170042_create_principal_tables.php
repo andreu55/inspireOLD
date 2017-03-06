@@ -24,11 +24,12 @@ class CreatePrincipalTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('name_trans')->nullable();
+            $table->tinyInteger('sexo')->default(0);
             $table->integer('tipo_id')->unsigned()->nullable();
             $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->boolean('generico');
+            $table->tinyInteger('generico')->default(0);
             $table->timestamps();
         });
 

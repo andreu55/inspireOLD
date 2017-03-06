@@ -29,7 +29,7 @@ class Input extends Model
       $inputs = [];
 
       foreach ($tipos as $tipo) {
-        $inputs[$tipo] = \DB::table('inputs')->select('name', 'name_trans')->where('tipo_id', $tipo)->where('generico', 1)->inRandomOrder()->take($cuantas)->get();
+        $inputs[$tipo] = \DB::table('inputs')->select('name', 'name_trans', 'sexo')->where('tipo_id', $tipo)->where('generico', 1)->inRandomOrder()->take($cuantas)->get();
       }
 
       return $inputs;
