@@ -493,6 +493,22 @@ class InputsTableSeeder extends Seeder
         ['tipo_id' => 5, 'name' => 'el poder', 'name_trans' => 'poder', 'generico' => 1],
         ['tipo_id' => 5, 'name' => 'la riqueza', 'name_trans' => 'riqueza', 'generico' => 1],
         ['tipo_id' => 5, 'name' => 'la enfermedad', 'name_trans' => 'enfermedad', 'generico' => 1],
+
+        ['tipo_id' => 6, 'name' => 'España', 'name_trans' => 'espana', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'Mordor', 'name_trans' => 'mordor', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'Escocia', 'name_trans' => 'Escocia', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'Indonesia', 'name_trans' => 'Indonesia', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'Tasmania', 'name_trans' => 'Tasmania', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'Siberia', 'name_trans' => 'Siberia', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'La Toscana', 'name_trans' => 'La_Toscana', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'El Sáhara', 'name_trans' => 'El_Sahara', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'Alaska', 'name_trans' => 'Alaska', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'El Himalaya', 'name_trans' => 'El_Himalaya', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'Estados Unidos', 'name_trans' => 'Estados_Unidos', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'Tanzania', 'name_trans' => 'Tanzania', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'Rivendel', 'name_trans' => 'rivendel', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'París', 'name_trans' => 'Paris', 'generico' => 1],
+        ['tipo_id' => 6, 'name' => 'La Comarca', 'name_trans' => 'la_comarca', 'generico' => 1],
       ]);
     }
 }
