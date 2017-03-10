@@ -37,4 +37,6 @@ Route::get('tipo/{id?}', 'UserController@cambiaTipo');
 Route::post('tipo/new', 'AdminController@newInput');
 Route::post('output/new', 'AdminController@newOutput');
 Route::post('input/delete', 'AdminController@borraInput');
+Route::post('input/edita', 'AdminController@editaInput');
 Route::post('output/delete', 'AdminController@borraOutput');
+Route::post('output/edita', 'AdminController@editaOutput');
