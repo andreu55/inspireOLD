@@ -33,4 +33,18 @@ class UserController extends Controller
       return back();
     }
 
+    public function update(Request $request) {
+
+      $user = Auth::user();
+      $campos = $request->except(['_token']);
+
+      foreach ($campos as $key => $value) {
+        $user->$key = $value;
+      }
+
+      $user->save();
+
+      return "200 OK";
+    }
+
 }

@@ -36,9 +36,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                   <div class="dropdown-menu" style="margin-left:-40px;">
-                    @if (Auth::user()->id == "1" || Auth::user()->id == "2")
-                      <a class="dropdown-item" href="{{ url('admin') }}">Admin</a>
-                    @endif
+                    <a class="dropdown-item" href="{{ url('admin') }}">Admin</a>
                     <a class="dropdown-item" href="{{ url('home') }}">Home</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

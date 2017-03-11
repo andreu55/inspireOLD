@@ -13,6 +13,8 @@
 
 Route::get('/', function () {
 
+    if (Auth::check()) { return redirect('home'); }
+
     // $frases = App\Output::cuantasDeTipo(1, 3);
 
     $aux = ["<span class='input_1'>[Personaje]</span> actúa de forma ilegal a causa de <span class='input_2'>[situación]</span>.",
@@ -40,3 +42,6 @@ Route::post('input/delete', 'AdminController@borraInput');
 Route::post('input/edita', 'AdminController@editaInput');
 Route::post('output/delete', 'AdminController@borraOutput');
 Route::post('output/edita', 'AdminController@editaOutput');
+
+
+Route::post('user/edit', 'UserController@update');

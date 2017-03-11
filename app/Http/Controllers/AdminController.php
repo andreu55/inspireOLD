@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('esAdmin');
+        // $this->middleware('esAdmin');
     }
 
     /**
@@ -32,36 +32,47 @@ class AdminController extends Controller
       $user = Auth::user();
       $tipos = Tipo::all();
 
+      // Mostramos input
       if ($id) {
-        if ($tipo = Tipo::find($id)) {
 
-          $inputs = Input::allGeneric($id);
+        $tipo = Tipo::find($id);
 
-          return view('admin/input')->with('user', $user)
-                                    ->with('tipo', $tipo)
-                                    ->with('tipos', $tipos)
-                                    ->with('inputs', $inputs);
-        }
+        $inputs = Input::allGeneric($id);
+
+        return view('admin/input')->with('user', $user)
+                                  ->with('tipo', $tipo)
+                                  ->with('tipos', $tipos)
+                                  ->with('inputs', $inputs);
+      // Mostramos outputs
       } else {
 
-        $aux = Output::get();
+        if ($user->esAdmin()) {
 
-        for ($i=1; $i <= 6 ; $i++) {
-          $outputs[$i] = [];
+          $aux = Output::get();
+
+          for ($i=1; $i <= 6 ; $i++) {
+            $outputs[$i] = [];
+          }
+
+          foreach ($aux as $key => $output) {
+            if (strpos($output->frase, "#1") !== false) { $outputs["1"][] = $output; }
+            if (strpos($output->frase, "#2") !== false) { $outputs["2"][] = $output; }
+            if (strpos($output->frase, "#3") !== false) { $outputs["3"][] = $output; }
+            if (strpos($output->frase, "#4") !== false) { $outputs["4"][] = $output; }
+            if (strpos($output->frase, "#5") !== false) { $outputs["5"][] = $output; }
+            if (strpos($output->frase, "#6") !== false) { $outputs["6"][] = $output; }
+          }
+
+          return view('admin/outputs')->with('user', $user)
+                                      ->with('tipos', $tipos)
+                                      ->with('outputs', $outputs);
+
+        } else {
+
+          return view('admin/settings')->with('user', $user)
+                                      ->with('tipos', $tipos);
+
         }
-
-        foreach ($aux as $key => $output) {
-          if (strpos($output->frase, "#1") !== false) { $outputs["1"][] = $output; }
-          if (strpos($output->frase, "#2") !== false) { $outputs["2"][] = $output; }
-          if (strpos($output->frase, "#3") !== false) { $outputs["3"][] = $output; }
-          if (strpos($output->frase, "#4") !== false) { $outputs["4"][] = $output; }
-          if (strpos($output->frase, "#5") !== false) { $outputs["5"][] = $output; }
-          if (strpos($output->frase, "#6") !== false) { $outputs["6"][] = $output; }
-        }
-
-        return view('admin/outputs')->with('user', $user)
-                                    ->with('tipos', $tipos)
-                                    ->with('outputs', $outputs);
       }
     }
 

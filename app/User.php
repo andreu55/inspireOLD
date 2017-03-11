@@ -16,4 +16,9 @@ class User extends Authenticatable
     protected $hidden = [ 'password', 'remember_token', ];
 
     public function input() { return $this->hasMany('App\Tipo'); }
+
+    public function esAdmin() {
+      if ($this->id == 1 || $this->id == 2) { return 1; }
+      else { return 0; }
+    }
 }
