@@ -27,6 +27,7 @@
   </div>
 
 </header>
+
 @endsection
 
 @section('scripts')
@@ -75,8 +76,8 @@
 
   function getInput(tipo, articulo) {
 
-    iin = iin + 1;
     var input = inputs[tipo-1][iin];
+    iin = iin + 1;
 
     while (input == undefined) {
       iin = 0;
@@ -89,12 +90,16 @@
       if (articulo == "e") { articulo = e[sexos[tipo-1][iin]] + " "; }
     } else { articulo = ""; }
 
+    // TODO: Revisar porque aveces aparece como undefined
+    if (articulo == undefined) {
+      articulo = "";
+    }
+
     input = articulo + input;
 
-    // Para testing
-    // $("#iin").html(iin);
+    // input = input.toLowerCase();
 
-    return input.toLowerCase();
+    return input;
   }
 
   function muestraFrase() {
@@ -134,7 +139,7 @@
 
     tipo = parseInt(this.attributes["data-tipo"].value);
     articulo = this.attributes["data-articulo"].value;
-    
+
     $(this).text(getInput(tipo, articulo));
   });
 

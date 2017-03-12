@@ -25,11 +25,33 @@ class Input extends Model
       return $input->id;
     }
 
-    public static function carga($tipos, $cuantas) {
+    public static function carga($tipos, $cuantas, $user) {
       $inputs = [];
+      $rand = rand(0, 99);
+      $carga_custom = $rand < $user->random;      
 
       foreach ($tipos as $tipo) {
-        $inputs[$tipo] = \DB::table('inputs')->select('name', 'name_trans', 'sexo')->where('tipo_id', $tipo)->where('generico', 1)->inRandomOrder()->take($cuantas)->get();
+
+        // Cargamos $cuantos inputs por defecto (los sustituiremos despues si procede)
+        $inputs_tipo = \DB::table('inputs')->where('tipo_id', $tipo)->where('generico', 1)->inRandomOrder()->take($cuantas)->get();
+
+        if ($carga_custom) {
+
+          $num_user_inputs = 0;
+          $num_user_inputs = \DB::table('inputs')->where('tipo_id', $tipo)->where('user_id', $user->id)->count();
+
+          $num = $num_user_inputs;
+          if ($num_user_inputs > $cuantas) { $num = $cuantas; }
+
+          $custom_inputs = \DB::table('inputs')->where('tipo_id', $tipo)->where('user_id', $user->id)->inRandomOrder()->take($num)->get();
+
+          foreach ($custom_inputs as $key => $custom_input) {
+            $inputs_tipo[$key] = $custom_input;
+          }
+        }
+
+        // Guardamos los inputs del tipo en el array mas grande
+        $inputs[$tipo] = $inputs_tipo;
       }
 
       return $inputs;
