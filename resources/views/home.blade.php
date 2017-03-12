@@ -91,7 +91,7 @@
     } else { articulo = ""; }
 
     // TODO: Revisar porque aveces aparece como undefined
-    if (articulo == undefined) {
+    if (articulo == "undefined ") {
       articulo = "";
     }
 
@@ -135,10 +135,13 @@
   }
 
   // Para cambiar los inputs al clickar en ellos
-  $("#frase").on("click", "span[class^='input_']", function(e) {
+  $("#frase").on("click", "span[class^='input_']", function() {
 
-    tipo = parseInt(this.attributes["data-tipo"].value);
-    articulo = this.attributes["data-articulo"].value;
+    // tipo = parseInt(this.attributes["data-tipo"].value);
+    tipo = parseInt($(this).data("tipo"));
+
+    // articulo = this.attributes["data-articulo"].value;
+    articulo = $(this).data("articulo");
 
     $(this).text(getInput(tipo, articulo));
   });

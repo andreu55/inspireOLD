@@ -9,10 +9,10 @@
         {{ csrf_field() }}
         <input type="hidden" name="user_id" value="{{ $user->id }}">
         <input type="hidden" name="tipo_id" value="{{ $tipo->id }}">
-        <input type="hidden" name="generico" value="1">
+        <input type="hidden" name="generico" value="{{ $user->esAdmin() }}">
         <div class="form-group">
           <div class="input-group">
-            <input type="text" id="name" name="name" class="form-control" placeholder="Nuevo {{ strtolower($tipo->name) }} genérico">
+            <input type="text" id="name" name="name" class="form-control" placeholder="Nuevo {{ strtolower($tipo->name) }} {{ $user->esAdmin() ? 'genérico' : '' }}">
             <span class="input-group-btn">
               <button class="btn btn-secondary" type="submit">save!</button>
             </span>
@@ -28,13 +28,15 @@
         <tbody>
           @foreach ($inputs as $input)
           <tr id="input_{{ $input->id }}">
+            @if ($user->esAdmin())
               <th scope="row">{{ $input->id }}</th>
-              <td class="edit" id="{{ $input->id }}">{{ $input->name }}</td>
-              <td class="text-right">
-                <button data-input="{{ $input->id }}" data-tipo="{{ $tipo->id }}" class="delete btn btn-outline-danger btn-sm">
-                  <i class="fa fa-fw fa-times"></i>
-                </button>
-              </td>
+            @endif
+            <td class="edit" id="{{ $input->id }}">{{ $input->name }}</td>
+            <td class="text-right">
+              <button data-input="{{ $input->id }}" data-tipo="{{ $tipo->id }}" class="delete btn btn-outline-danger btn-sm">
+                <i class="fa fa-fw fa-times"></i>
+              </button>
+            </td>
           </tr>
         @endforeach
         </tbody>

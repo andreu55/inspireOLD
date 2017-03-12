@@ -15,7 +15,7 @@ class User extends Authenticatable
     // The attributes that should be hidden for arrays.
     protected $hidden = [ 'password', 'remember_token', ];
 
-    public function input() { return $this->hasMany('App\Tipo'); }
+    public function inputs($tipo_id) { return $this->hasMany('App\Input')->where('tipo_id', $tipo_id)->get(); }
 
     public function esAdmin() {
       if ($this->id == 1 || $this->id == 2) { return 1; }

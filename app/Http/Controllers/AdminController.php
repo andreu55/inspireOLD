@@ -37,7 +37,11 @@ class AdminController extends Controller
 
         $tipo = Tipo::find($id);
 
-        $inputs = Input::allGeneric($id);
+        if ($user->esAdmin()) {
+          $inputs = Input::allGeneric($id);
+        } else {
+          $inputs = $user->inputs($id);
+        }
 
         return view('admin/input')->with('user', $user)
                                   ->with('tipo', $tipo)
