@@ -10,38 +10,33 @@
 <header>
   <div class="header-content">
     <div class="inner">
-
-      <!-- Slider main container -->
       <div class="swiper-container">
-          <!-- Additional required wrapper -->
-          <div class="swiper-wrapper">
-              <!-- Slides -->
-              <div class="swiper-slide">
-                {{-- <h5 id="test"></h5> --}}
-                <h1 id="frase"></h1>
-                {{-- <h5 class="wow fadeIn text-normal"></h5> --}}
-              </div>
-              <div class="swiper-slide">Slide 2</div>
-              <div class="swiper-slide">Slide 3</div>
-          </div>
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          @foreach ($outputs as $key => $output)
+            <div class="swiper-slide">
+              <h5 id="test_{{ $key }}"></h5>
+              <h1 id="frase_{{ $key }}">{{ $output->frase }}</h1>
+              {{-- <h5 class="wow fadeIn text-normal"></h5> --}}
+            </div>
+          @endforeach
+        </div>
 
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
 
-          <!-- If we need pagination -->
-          <div class="swiper-pagination"></div>
+        {{-- cambiaFrase() --}}
+        <button id="recarga_pag" class="btn btn-info-outline" onclick="location.reload()" style="display:none">Recarga</button>
 
-          {{-- cambiaFrase() --}}
-          <button id="recarga_pag" class="btn btn-info-outline" onclick="location.reload()" style="display:none">Recarga</button>
-
-          <!-- If we need navigation buttons -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+        <!-- Navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
     </div>
   </div>
 
-
-
-  <div class="fixed-action-btn horizontal">
+  {{-- Boton flotante --}}
+  <div class="fixed-action-btn vertical">
     <a class="btn-floating btn-large btn-input_{{ $tipo->id }}" data-toggle="tooltip" data-placement="top" title="{{ $tipo->name }}">
       <i class="fa fa-{{ $tipo->icon }}"></i>
     </a>
@@ -62,9 +57,16 @@
 
 <script type="text/javascript">
 
-  // i de input y de output
-  var iin = 0;
-  var iout = 0;
+
+  var iin = [
+    @foreach ($outputs as $output)
+      [
+        @for ($i = 0; $i < 5; $i++)
+          0,
+        @endfor
+      ],
+    @endforeach
+  ];
 
   var u = ["un", "una"];
   var e = ["el", "la"];
@@ -73,68 +75,54 @@
     @foreach ($inputs as $tipos_input)
       [
         @foreach ($tipos_input as $input)
-          "{{ $input->name }}",
+          {name: "{{ $input->name }}", sexo: "{{ $input->sexo }}"},
         @endforeach
       ],
     @endforeach
   ];
 
-  var sexos = [
-    @foreach ($inputs as $tipos_input)
-      [
-        @foreach ($tipos_input as $input)
-          "{{ $input->sexo }}",
-        @endforeach
-      ],
-    @endforeach
-  ];
+  function getInput(tipo, articulo, iin_pos = 0) {
 
-  var outputs = [
-    @foreach ($outputs as $output)
-    "{{ $output->frase }}",
-    @endforeach
-  ];
+    tipo = tipo - 1; // Para que se adecue al array empezando en 0
+    iin_aux = iin[tipo][iin_pos];
 
-  function cambiaFrase() {
-    if (iout >= {{ $cuantas - 1 }} || !outputs[iout + 1]) { location.reload(); }
-    else {
-      iout = iout + 1;
-      muestraFrase();
-    }
-  }
-
-  function getInput(tipo, articulo) {
-
-    var input = inputs[tipo-1][iin];
-    iin = iin + 1;
-
-    while (input == undefined) {
-      iin = 0;
-      input = inputs[tipo-1][iin];
-    }
+    // if (inputs[tipo][iin_aux].name == undefined) { iin_aux = 0; }
 
     // si encuentra articulo en modo #1u o #1e saltamos una posicion más al construir la frase
-    if (articulo == "u" || articulo == "e") {
-      if (articulo == "u") { articulo = u[sexos[tipo-1][iin]] + " "; }
-      if (articulo == "e") { articulo = e[sexos[tipo-1][iin]] + " "; }
-    } else { articulo = ""; }
-
-    // TODO: Revisar porque aveces aparece como undefined
-    if (articulo == "undefined ") {
-      articulo = "";
+    if (articulo.trim() == "u" || articulo.trim() == "e") {
+      if (articulo == "u") { artic = u[inputs[tipo][iin_aux].sexo] + " "; }
+      if (articulo == "e") { artic = e[inputs[tipo][iin_aux].sexo] + " "; }
     }
+    else { artic = ""; }
 
-    input = articulo + input;
+    aux = artic + inputs[tipo][iin_aux].name;
+    iin[tipo][iin_pos] = iin[tipo][iin_pos] + 1;
 
-    // input = input.toLowerCase();
-
-    return input;
+    return aux;
   }
 
-  function muestraFrase() {
+  function dameArticulo(cod) {
 
-    // Cogemos la siguiente frase disponible
-    var frase = outputs[iout];
+    // Sacamos el tipo
+    tipo = cod.substring(0, 1);
+    articulo = cod.substring(2, 3);
+    iin_actual = iin[tipo][0];
+    extra = 0;
+
+    // si encuentra articulo en modo #1u o #1e saltamos una posicion más al construir la frase
+    if (articulo == "u" || articulo == "e") { extra = 1; }
+
+  }
+
+
+
+
+
+
+
+
+  function formatFrase(frase) {
+
     var pos = frase.search("#");
     var tipo;
     var input;
@@ -142,15 +130,10 @@
     // Mientras encontremos simbolos # en la frase
     while(pos != -1) {
 
-      // Sacamos el tipo
-      tipo = frase.substring(pos+1, pos+2);
-      articulo = frase.substring(pos+2, pos+3);
+      cod = frase.substring(pos+1, pos+3);
+      input = dameArticulo(cod);
 
-      // si encuentra articulo en modo #1u o #1e saltamos una posicion más al construir la frase
-      if (articulo == "u" || articulo == "e") { extra = 1; }
-      else { extra = 0; }
-
-      input = "<span class='input_" + tipo + "' data-tipo=" + tipo + " data-articulo=" + articulo + ">" + getInput(tipo, articulo) + "</span>";
+      input = "<span class='input_" + tipo + "' data-tipo=" + tipo + " data-articulo=" + articulo + " data-iin=0>" + getInput(tipo, articulo) + "</span>";
 
       // if (pos != 0) { input = input.toLowerCase(); }
 
@@ -159,55 +142,57 @@
       pos = frase.search("#");
     }
 
-    $('#test').text(frase);
-    $('#frase').html(frase);
+    return frase;
   }
 
   // Para cambiar los inputs al clickar en ellos
-  $("#frase").on("click", "span[class^='input_']", function() {
+  $("h5[id^='test_']").on("click", "span[class^='input_']", function() {
 
     // tipo = parseInt(this.attributes["data-tipo"].value);
-    tipo = parseInt($(this).data("tipo"));
-
     // articulo = this.attributes["data-articulo"].value;
-    articulo = $(this).data("articulo");
 
-    $(this).text(getInput(tipo, articulo));
-  });
+    tipo = parseInt($(this).data("tipo"));
+    articulo = $(this).data("articulo").trim();
 
-
-  $(document).ready(function(){
-
-    // Cargamos la primera frase
-    muestraFrase();
-
-    // Activamos los tooltips
-    $('[data-toggle="tooltip"]').tooltip();
-
+    $(this).text(getInput(tipo, articulo, iin + 1));
   });
 
 </script>
 
-
+{{-- DOCS slider: http://idangero.us/swiper/api/#.WMwxlfnhA4k --}}
 <script src="{{ asset('bower_components/swiper/dist/js/swiper.jquery.min.js') }}"></script>
 <script type="text/javascript">
 
   $(document).ready(function () {
+
+    // Formateamos la primera frase
+    output = formatFrase( $('#frase_0').text() );
+    $('#test_0').html(output);
+
 
    // Initialize swiper
    var mySwiper = new Swiper ('.swiper-container', {
     //  loop: true
    });
 
-   mySwiper.on('slideChangeStart', function () {
-     if (mySwiper.isEnd) {
-       $('#recarga_pag').addClass('animated flipInX').show();
-     }
+   mySwiper.on('slideChangeStart', function (swiper) {
+
+     if (mySwiper.isEnd) { $('#recarga_pag').addClass('animated flipInX').show(); }
+
+     id = swiper.activeIndex;
+     output = formatFrase( $('#frase_' + id).text() );
+
+    //  $('#test_' + id).text(output);
+      $('#test_' + id).html(output);
    });
 
    $('.swiper-button-prev').on('click', function() { mySwiper.slidePrev(); });
    $('.swiper-button-next').on('click', function() { mySwiper.slideNext(); });
   });
+
+
+  // Activamos los tooltips
+  $('[data-toggle="tooltip"]').tooltip();
 
 </script>
 
