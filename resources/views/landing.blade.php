@@ -47,7 +47,9 @@
     var a = b = c = d = e = 0;
     var personajes = ["Tom", "Jerry", "Mafalda"];
     var lugares = ["una taberna", "una montaña", "unas ruinas"];
-    var situaciones = ["kjgaf", "<dkjgfakdf", "dkjgsdkjfhd"];
+    var objetos = ["una flauta", "un pintalabios", "un libro"];
+    var situaciones = ["una aventura", "un crimen", "una persecución"];
+    // var temas = ["el bien", "el mal", "la felicidad"];
 
     $(function(){
         $("#titulaco").typed({
@@ -57,8 +59,8 @@
             @endforeach
             "^1000"
           ],
-          contentType: 'html',
-          backDelay: 5000,
+          // contentType: 'html',
+          backDelay: 5500,
           typeSpeed: 1, // 29
           callback: function() {
             $('.typed-cursor').slideUp(); // .fadeOut()
@@ -67,7 +69,9 @@
 
             animaInput(1, personajes, "[Personaje]");
             animaInput(2, situaciones, "[situación]");
+            animaInput(3, objetos, "[objeto]");
             animaInput(4, lugares, "[lugar]");
+            // animaInput(5, temas, "[tema]");
 
           }
         });
