@@ -7,8 +7,8 @@
           <h2>
             <span id="titulaco"></span>
           </h2>
-          <h5 class="wow fadeIn text-normal wow fadeIn" data-wow-duration="2s">Encuentra la inspiración que buscas</h5>
-          <a href="{{ url('register') }}" class="btn btn-default-outline wow fadeInUp" data-wow-duration="2s" data-wow-delay="2s">Regístrate</a>
+          <h3 class="wow fadeIn letra-laravel" data-wow-duration="2s" data-wow-delay="1s">Encuentra la inspiración</h3>
+          <a href="{{ url('register') }}" class="btn btn-default-outline wow fadeInUp" data-wow-duration="2s" data-wow-delay="3s">Regístrate</a>
       </div>
     </div>
   </header>
