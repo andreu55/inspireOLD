@@ -1,25 +1,26 @@
 @extends('layouts.app')
 
-@section('css')
-  <link rel="stylesheet" href="{{ asset('bower_components/swiper/dist/css/swiper.min.css') }}">
-  <style>
-  </style>
-@endsection
-
 @section('content')
 <header>
   <div class="header-content">
     <div class="inner">
 
-      <!-- Slider main container -->
+      {{-- <h5 id="test"></h5> --}}
+      <h1 id="frase"></h1>
+      <h5 class="wow fadeIn text-normal wow fadeIn">
+        {{-- {{ $tipo->name }} <span id="iin"></span> --}}
+      </h5>
+      <button class="btn btn-lg btn-default-outline wow fadeInUp" onclick="cambiaFrase()">
+        <i class="fa fa-fw fa-refresh"></i>
+      </button>
+
+      {{-- <!-- Slider main container -->
       <div class="swiper-container">
           <!-- Additional required wrapper -->
           <div class="swiper-wrapper">
               <!-- Slides -->
               <div class="swiper-slide">
-                {{-- <h5 id="test"></h5> --}}
                 <h1 id="frase"></h1>
-                {{-- <h5 class="wow fadeIn text-normal"></h5> --}}
               </div>
               <div class="swiper-slide">Slide 2</div>
               <div class="swiper-slide">Slide 3</div>
@@ -29,13 +30,12 @@
           <!-- If we need pagination -->
           <div class="swiper-pagination"></div>
 
-          {{-- cambiaFrase() --}}
           <button id="recarga_pag" class="btn btn-info-outline" onclick="location.reload()" style="display:none">Recarga</button>
 
           <!-- If we need navigation buttons -->
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
-      </div>
+      </div> --}}
     </div>
   </div>
 
@@ -184,29 +184,6 @@
     // Activamos los tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
-  });
-
-</script>
-
-
-<script src="{{ asset('bower_components/swiper/dist/js/swiper.jquery.min.js') }}"></script>
-<script type="text/javascript">
-
-  $(document).ready(function () {
-
-   // Initialize swiper
-   var mySwiper = new Swiper ('.swiper-container', {
-    //  loop: true
-   });
-
-   mySwiper.on('slideChangeStart', function () {
-     if (mySwiper.isEnd) {
-       $('#recarga_pag').addClass('animated flipInX').show();
-     }
-   });
-
-   $('.swiper-button-prev').on('click', function() { mySwiper.slidePrev(); });
-   $('.swiper-button-next').on('click', function() { mySwiper.slideNext(); });
   });
 
 </script>
